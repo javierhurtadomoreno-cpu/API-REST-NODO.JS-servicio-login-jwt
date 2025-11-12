@@ -26,4 +26,31 @@ pool.getConnection((err, connection) => {
 });
 
 // Exportar pool configurado para usar promesas (async/await)
-module.exports = pool.promise();
+const poolPromise = pool.promise();
+
+// Crear tablas necesarias si no existen
+async function inicializarBaseDatos() {
+  try {
+    await poolPromise.query(`CREATE TABLE IF NOT EXISTS usuarios (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      usuario VARCHAR(50) NOT NULL UNIQUE,
+      contrasena VARCHAR(255) NOT NULL
+    )`);
+
+    await poolPromise.query(`CREATE TABLE IF NOT EXISTS datos_personales (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      usuario_id INT NOT NULL,
+      nombres VARCHAR(150) NOT NULL,
+      identificacion VARCHAR(30) NOT NULL,
+      FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
+    )`);
+
+    console.log('Tablas verificadas o creadas correctamente.');
+  } catch (error) {
+    console.error('Error al crear tablas necesarias:', error.message);
+  }
+}
+
+inicializarBaseDatos();
+
+module.exports = poolPromise;

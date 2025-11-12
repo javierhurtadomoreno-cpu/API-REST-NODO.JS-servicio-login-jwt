@@ -15,9 +15,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Importar rutas de autenticacion
 const authRoutes = require('./routes/authRoutes');
+const datosRoutes = require('./routes/datosRoutes');
 
 // Usar las rutas bajo el prefijo /api
 app.use('/api', authRoutes);
+app.use('/api', datosRoutes);
 
 // Ruta principal para verificar que el servidor funciona
 app.get('/', (req, res) => {
@@ -26,7 +28,11 @@ app.get('/', (req, res) => {
     rutas: {
       registro: 'POST /api/registro',
       login: 'POST /api/login',
-      perfil: 'GET /api/perfil (requiere token)'
+      perfil: 'GET /api/perfil (requiere token)',
+      datos: {
+        registrarOActualizar: 'POST /api/datos (requiere token)',
+        consultar: 'GET /api/datos (requiere token)'
+      }
     }
   });
 });
@@ -41,4 +47,6 @@ app.listen(PORT, () => {
   console.log('POST http://localhost:' + PORT + '/api/registro');
   console.log('POST http://localhost:' + PORT + '/api/login');
   console.log('GET  http://localhost:' + PORT + '/api/perfil');
+  console.log('POST http://localhost:' + PORT + '/api/datos');
+  console.log('GET  http://localhost:' + PORT + '/api/datos');
 });

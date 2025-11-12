@@ -18,5 +18,14 @@
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.15.3"
   },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/javierhurtadomoreno-cpu/Javier_Hurtadado_GA7-220501096_AA4_EV03..git"
+  },
+  "bugs": {
+    "url": "https://github.com/javierhurtadomoreno-cpu/Javier_Hurtadado_GA7-220501096_AA4_EV03./issues"
+  },
+  "homepage": "https://github.com/javierhurtadomoreno-cpu/Javier_Hurtadado_GA7-220501096_AA4_EV03.#readme",
   "description": ""
 }
